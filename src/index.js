@@ -1,41 +1,39 @@
-import menues from './menu.json';
+const colors = [
+  '#FFFFFF',
+  '#2196F3',
+  '#4CAF50',
+  '#FF9800',
+  '#009688',
+  '#795548',
+];
 
-const Theme = {
-  LIGHT: 'light-theme',
-  DARK: 'dark-theme',
+refs = {
+    startBtn: document.querySelector('[data-action = "start"]'),
+    stoptBtn: document.querySelector('[data-action = "stop"]'),
+}
+refs.startBtn.addEventListener('click', onStartClick);
+refs.stoptBtn.addEventListener('click', onStopClick);
+let intervalId = null;
+
+function onStopClick() {
+    clearInterval(intervalId)
+    refs.startBtn.disabled = false;
+    
+}
+
+function onStartClick() {
+    refs.startBtn.disabled = true;
+    intervalId = setInterval(() => {
+      let randomIndex = randomIntegerFromInterval(0, colors.length -1)
+        document.body.style.backgroundColor = colors[randomIndex];
+        
+        
+   
+    }, 1000)
+    
+}
+
+
+const randomIntegerFromInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
-const switchTheme = document.querySelector('#theme-switch-toggle')
-switchTheme.addEventListener('change', onSwithCange);
-document.body.classList.add(Theme.LIGHT);
-const isDarkTheme = localStorage.getItem('isDarkTheme');
-checkThemeState();
-
-
-
-function checkThemeState() {
-    if (isDarkTheme === 'true') {
-        document.body.classList.replace(Theme.LIGHT, Theme.DARK);
-        switchTheme.checked = true;
-        return
-    }
-    else {
-        document.body.classList.replace(Theme.DARK, Theme.LIGHT);
-        switchTheme.checked = false;
-
-    }
-    
-}
-
-
-function onSwithCange(evt) {
-    
-    localStorage.setItem('isDarkTheme',evt.target.checked)
-    if (evt.target.checked) {
-        document.body.classList.remove(Theme.LIGHT)
-        document.body.classList.add(Theme.DARK)
-    }
-    else {
-        document.body.classList.add(Theme.LIGHT)
-        document.body.classList.remove(Theme.DARK)
-    };
-}
