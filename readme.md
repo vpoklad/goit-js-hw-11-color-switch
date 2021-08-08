@@ -7,7 +7,7 @@
 <button type="button" data-action="stop">Stop</button>
 ```
 
-```js
+````js
 const colors = [
   '#FFFFFF',
   '#2196F3',
@@ -16,7 +16,7 @@ const colors = [
   '#009688',
   '#795548',
 ];
-```
+
 
 Напиши скрипт, который после нажатия кнопки `Start`, раз в секунду меняет цвет
 фона `body` на случайное значение из массива используя инлайн-стиль. При нажатии
@@ -32,4 +32,4 @@ const colors = [
 const randomIntegerFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
-```
+````
